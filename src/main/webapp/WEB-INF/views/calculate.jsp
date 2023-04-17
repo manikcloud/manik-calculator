@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Manik Calculator</title>
-<style>
+<!-- <style>
   body {
     font-family: Arial, sans-serif;
   }
@@ -36,7 +36,7 @@
   button:hover {
     background-color: #45a049;
   }
-</style>
+</style> -->
 </head>
 <body>
   <div class="container">
