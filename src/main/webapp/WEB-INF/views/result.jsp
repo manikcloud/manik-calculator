@@ -15,7 +15,7 @@
 			<span>${result}</span>
 		</div>
 		<div class="row">
-			<button type="button" onclick="location.href='calculate'">Calculate Again</button>
+			<button type="button" onclick="location.href='index.jsp'">Calculate Again</button>
 		</div>
 	</div>
 </body>
