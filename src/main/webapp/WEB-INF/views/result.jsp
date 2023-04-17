@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Result</title>
+	<meta charset="UTF-8">
+	<title>Manik Calculator - Result</title>
 </head>
 <body>
-    <h1>Result</h1>
-    <p>The result of the calculation is: ${result}</p>
-    <p><a href="/">Go Back</a></p>
+	<h1>Manik Calculator</h1>
+	<h2>Result:</h2>
+	<p>${num1} ${operation} ${num2} = ${result}</p>
 </body>
 </html>
