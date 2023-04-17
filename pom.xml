@@ -71,7 +71,6 @@
             </plugin>
             
             <!-- Maven War Plugin -->
-            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -80,24 +79,18 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
-
             
+            <!-- Tomcat Maven Plugin -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat9-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <path>/manik-calculator</path>
+                    <port>8090</port>
+                </configuration>
+            </plugin>
         </plugins>
-
-
-        <plugins>
-  <plugin>
-    <groupId>org.apache.tomcat.maven</groupId>
-    <artifactId>tomcat9-maven-plugin</artifactId>
-    <version>3.0.0-M2</version>
-    <configuration>
-      <port>8080</port> <!-- change port number as per your requirement -->
-      <path>/</path>
-    </configuration>
-  </plugin>
-</plugins>
-
-
     </build>
     
 </project>
