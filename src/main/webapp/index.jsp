@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>Manik Calculator</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Manik Calculator</title>
+        <link href="css/styles.css" rel="stylesheet" type="text/css">
+      </head>
+      
 <body>
 	<h1>Manik Calculator</h1>
 	<form action="calculate" method="post">
