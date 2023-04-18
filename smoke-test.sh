@@ -4,7 +4,7 @@
 response=$(curl -s -X POST -H "Content-Type: application/x-www-form-urlencoded" -d 'num1=3&num2=5&operation=add' http://34.238.38.207:8090/manik-calculator/calculate)
 
 # Check if the response contains the expected result
-if [[ $response == *"8"* ]]; then
+if [[ "$response" == *"8"* ]]; then
   echo "Smoke test passed"
   exit 0
 else
