@@ -84,7 +84,7 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat9-maven-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>2.2</version>
                 <configuration>
                     <path>/manik-calculator</path>
                     <port>8090</port>
