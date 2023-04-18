@@ -54,7 +54,7 @@
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
-        <dependencies>
+        
         <!-- Other dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -68,8 +68,7 @@
             <version>4.2.0</version>
             <scope>test</scope>
         </dependency>
-        </dependencies>
-
+        
     </dependencies>
     
     <build>
