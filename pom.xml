@@ -16,6 +16,8 @@
     <properties>
         <tomcat.version>9.0.52</tomcat.version>
         <java.version>11</java.version>
+        <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
+
     </properties>
     
     <dependencies>
@@ -142,7 +144,7 @@
 <plugin>
     <groupId>com.spotify</groupId>
     <artifactId>dockerfile-maven-plugin</artifactId>
-    <version>${dockerfile-maven-plugin.version}</version>
+    <version>${project.properties.dockerfile-maven-plugin.version}</version>
     <configuration>
         <repository>varunmanik/manik-calculator</repository>
         <tag>${project.version}</tag>
