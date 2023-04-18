@@ -1,20 +1,33 @@
 package com.example.manikcalculator;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class CalculatorController {
 
-    @PostMapping("/calculate")
-    public String calculate(@RequestParam("num1") double num1,
-                             @RequestParam("num2") double num2,
-                             @RequestParam("operation") String operation,
-                             Model model) {
+    @RequestMapping(value = "/calculate", method = RequestMethod.POST)
+    public ModelAndView calculate(HttpServletRequest request, HttpServletResponse response) {
 
-        double result = 0.0;
+        ModelAndView modelAndView = new ModelAndView();
+        double num1, num2, result;
+        String operation;
+        
+        try {
+            num1 = Double.parseDouble(request.getParameter("num1"));
+            num2 = Double.parseDouble(request.getParameter("num2"));
+        } catch (NumberFormatException e) {
+            modelAndView.setViewName("error");
+            modelAndView.addObject("message", "Please enter valid numbers");
+            return modelAndView;
+        }
+
+        operation = request.getParameter("operation");
 
         switch (operation) {
             case "add":
@@ -27,17 +40,23 @@ public class CalculatorController {
                 result = num1 * num2;
                 break;
             case "divide":
-                result = num1 / num2;
-                break;
+                if (num2 == 0) {
+                    modelAndView.setViewName("error");
+                    modelAndView.addObject("message", "Cannot divide by zero");
+                    return modelAndView;
+                } else {
+                    result = num1 / num2;
+                    break;
+                }
             default:
-                model.addAttribute("error", "Invalid operation selected");
-                return "error";
+                modelAndView.setViewName("error");
+                modelAndView.addObject("message", "Invalid operation selected");
+                return modelAndView;
         }
 
-        model.addAttribute("num1", num1);
-        model.addAttribute("num2", num2);
-        model.addAttribute("result", result);
-        model.addAttribute("operation", operation);
-        return "result";
+        modelAndView.setViewName("result");
+        modelAndView.addObject("result", result);
+
+        return modelAndView;
     }
 }
