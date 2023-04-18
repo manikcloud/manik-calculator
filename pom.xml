@@ -85,15 +85,6 @@
                 </configuration>
             </plugin>
             
-            <!-- Maven War Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.1</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
             
             <!-- Tomcat Maven Plugin -->
             <plugin>
@@ -147,26 +138,27 @@
             </executions>
             </plugin>
 
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.13</version>
-                <configuration>
-                    <repository>varunmanik/manik-calculator</repository>
-                    <tag>${project.version}</tag>
-                    <buildArgs>
-                        <JAR_FILE>target/${project.build.finalName}.war</JAR_FILE>
-                    </buildArgs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            
+<plugin>
+    <groupId>com.spotify</groupId>
+    <artifactId>dockerfile-maven-plugin</artifactId>
+    <version>${dockerfile-maven-plugin.version}</version>
+    <configuration>
+        <repository>varunmanik/manik-calculator</repository>
+        <tag>${project.version}</tag>
+        <buildArgs>
+            <JAR_FILE>target/${project.build.finalName}.war</JAR_FILE>
+        </buildArgs>
+    </configuration>
+    <executions>
+        <execution>
+            <id>default</id>
+            <goals>
+                <goal>build</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
 
         </plugins>
     </build>
