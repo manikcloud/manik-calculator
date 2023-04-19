@@ -140,30 +140,25 @@
             </executions>
             </plugin>
 
-            
-<plugin>
-    <groupId>com.spotify</groupId>
-    <artifactId>dockerfile-maven-plugin</artifactId>
-    <version>1.4.13</version>
-    <configuration>
-        <repository>varunmanik/manik-calculator</repository>
-        <tag>${project.version}</tag>
-        <buildArgs>
-            <JAR_FILE>target/${project.build.finalName}.war</JAR_FILE>
-        </buildArgs>
-        <contextDirectory>${project.basedir}</contextDirectory> <!-- Add this line -->
-    </configuration>
-    <executions>
-        <execution>
-            <id>default</id>
-            <goals>
-                <goal>build</goal>
-            </goals>
-        </execution>
-    </executions>
-</plugin>
-
         </plugins>
+
+
+<extensions>
+        <extension>
+            <groupId>com.spotify</groupId>
+            <artifactId>dockerfile-maven-extension</artifactId>
+            <version>1.4.13</version>
+            <configuration>
+                <repository>varunmanik/manik-calculator</repository>
+                <tag>${project.version}</tag>
+                <contextDirectory>${project.basedir}</contextDirectory>
+            </configuration>
+        </extension>
+    </extensions>
+    
+
+
+
     </build>
     
 </project>
