@@ -21,11 +21,11 @@ FROM adoptopenjdk/openjdk11:alpine
 
 # Install Tomcat
 ENV TOMCAT_VERSION 9.0.54
-RUN apk add --no-cache --update curl && \
-    curl -O https://downloads.apache.org/tomcat/tomcat-9/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
-    tar -xzf apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
-    rm apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
-    mv apache-tomcat-${TOMCAT_VERSION} /usr/local/tomcat
+RUN apk add --no-cache --update curl
+RUN curl -O https://downloads.apache.org/tomcat/tomcat-9/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz
+RUN tar -xzf apache-tomcat-${TOMCAT_VERSION}.tar.gz
+RUN rm apache-tomcat-${TOMCAT_VERSION}.tar.gz
+RUN mv apache-tomcat-${TOMCAT_VERSION} /usr/local/tomcat
 
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
