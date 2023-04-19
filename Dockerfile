@@ -20,8 +20,8 @@ RUN mvn clean package
 FROM adoptopenjdk/openjdk11:alpine
 
 # Install Tomcat
-ENV TOMCAT_VERSION 9.0.53
-RUN apk add --no-cache curl && \
+ENV TOMCAT_VERSION 9.0.54
+RUN apk add --no-cache --update curl && \
     curl -O https://downloads.apache.org/tomcat/tomcat-9/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
     tar -xzf apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
     rm apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
