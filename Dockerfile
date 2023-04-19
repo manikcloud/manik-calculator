@@ -23,10 +23,11 @@ FROM adoptopenjdk/openjdk11:alpine
 ENV TOMCAT_VERSION 9.0.54
 RUN curl -O https://downloads.apache.org/tomcat/tomcat-9/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
     curl -O https://downloads.apache.org/tomcat/tomcat-9/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz.sha512 && \
-    sha512sum -c apache-tomcat-${TOMCAT_VERSION}.tar.gz.sha512 && \
+    shasum -a 512 -c apache-tomcat-${TOMCAT_VERSION}.tar.gz.sha512 && \
     tar -xvzf apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
     rm apache-tomcat-${TOMCAT_VERSION}.tar.gz apache-tomcat-${TOMCAT_VERSION}.tar.gz.sha512 && \
     mv apache-tomcat-${TOMCAT_VERSION} /usr/local/tomcat
+
 
 
 ENV CATALINA_HOME /usr/local/tomcat
