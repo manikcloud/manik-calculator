@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
     
     <modelVersion>4.0.0</modelVersion>
@@ -17,7 +17,6 @@
         <tomcat.version>9.0.52</tomcat.version>
         <java.version>11</java.version>
         <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
-
     </properties>
     
     <dependencies>
@@ -73,150 +72,9 @@
         
     </dependencies>
     
-   <build>
-    <finalName>manik-calculator</finalName>
-    <plugins>
-        <!-- Maven Compiler Plugin -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.8.1</version>
-            <configuration>
-                <source>${java.version}</source>
-                <target>${java.version}</target>
-            </configuration>
-        </plugin>
-
-        <!-- Tomcat Maven Plugin -->
-        <plugin>
-            <groupId>org.apache.tomcat.maven</groupId>
-            <artifactId>tomcat7-maven-plugin</artifactId>
-            <version>2.2</version>
-            <configuration>
-                <path>/manik-calculator</path>
-                <port>8090</port>
-            </configuration>
-        </plugin>
-
-        <!-- Jacoco Plugin -->
-        <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.7</version>
-            <executions>
-                <execution>
-                    <id>prepare-agent</id>
-                    <goals>
-                        <goal>prepare-agent</goal>
-                    </goals>
-                </execution>
-                <execution>
-                    <id>report</id>
-                    <phase>test</phase>
-                    <goals>
-                        <goal>report</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-
-        <!-- Clover Plugin -->
-        <plugin>
-            <groupId>com.atlassian.maven.plugins</groupId>
-            <artifactId>maven-clover2-plugin</artifactId>
-            <version>3.0.4</version>
-            <configuration>
-                <generateXml>true</generateXml>
-            </configuration>
-            <executions>
-                <execution>
-                    <phase>verify</phase>
-                    <goals>
-                        <goal>instrument</goal>
-                        <goal>clover</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-
-        <!-- Dockerfile Maven Plugin -->
-        <plugin>
-            <groupId>com.spotify</groupId>
-            <artifactId>dockerfile-maven-plugin</artifactId>
-            <version>${dockerfile-maven-plugin.version}</version>
-            <configuration>
-                <repository>varunmanik/manik-calculator</repository>
-                <tag>${project.version}</tag>
-                <contextDirectory>${project.basedir}</contextDirectory>
-            </configuration>
-        </plugin>
-
-
-
-                <!-- Checkstyle Plugin -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-checkstyle-plugin</artifactId>
-            <version>3.1.2</version>
-            <executions>
-                <execution>
-                    <phase>verify</phase>
-                    <goals>
-                        <goal>check</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-
-        <!-- FindBugs Plugin -->
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>findbugs-maven-plugin</artifactId>
-            <version>3.0.5</version>
-            <executions>
-                <execution>
-                    <phase>verify</phase>
-                    <goals>
-                        <goal>check</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-
-        <!-- Cobertura Plugin -->
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>cobertura-maven-plugin</artifactId>
-            <version>2.7</version>
-            <executions>
-                <execution>
-                    <phase>verify</phase>
-                    <goals>
-                        <goal>cobertura</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-
-        <!-- PMD Plugin -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-pmd-plugin</artifactId>
-            <version>3.14.0</version>
-            <executions>
-                <execution>
-                    <phase>verify</phase>
-                    <goals>
-                        <goal>check</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-
-
-
-    </plugins>
-</build>
-
-    
-</project>
+    <build>
+        <finalName>manik-calculator</finalName>
+        <plugins>
+            <!-- Maven Compiler Plugin -->
+            <plugin>
+               
