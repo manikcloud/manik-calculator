@@ -15,11 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class CalculatorController {
 
     /**
-     * Calculates the result based on the user's input and operation.
-     *
-     * @param request  HttpServletRequest object
-     * @param response HttpServletResponse object
-     * @return ModelAndView object
+     * Calculate method.
      */
     @RequestMapping(value = "/calculate", method = RequestMethod.POST)
     public ModelAndView calculate(HttpServletRequest request, HttpServletResponse response) {
