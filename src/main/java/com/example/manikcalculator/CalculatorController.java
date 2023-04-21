@@ -8,16 +8,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * CalculatorController class.
+ */
 @Controller
 public class CalculatorController {
 
+    /**
+     * Calculates the result based on the user's input and operation.
+     *
+     * @param request  HttpServletRequest object
+     * @param response HttpServletResponse object
+     * @return ModelAndView object
+     */
     @RequestMapping(value = "/calculate", method = RequestMethod.POST)
     public ModelAndView calculate(HttpServletRequest request, HttpServletResponse response) {
 
         ModelAndView modelAndView = new ModelAndView();
         double num1, num2, result;
         String operation;
-        
+
         try {
             num1 = Double.parseDouble(request.getParameter("num1"));
             num2 = Double.parseDouble(request.getParameter("num2"));
