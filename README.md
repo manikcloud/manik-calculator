@@ -118,6 +118,17 @@ This readme provides a step-by-step guide for installing SonarQube and configuri
 
 ## SonarQube Docker Installation
 
+* Before installing SonarQube using Docker, ensure that your system meets the following prerequisites:
+
+- **Minimum 8GB RAM to run SonarQube container smoothly.**
+
+If you meet the prerequisites, follow these steps to install SonarQube using Docker:
+
+1. Ensure Docker is installed on your system. If it's not installed, download and install Docker from above mentioned command. 
+
+
+## SonarQube Docker Installation
+
 1. Ensure Docker is installed on your system. If it's not installed, download and install Docker from the official Docker website.
 
 2. Open your terminal and run the following command to download the SonarQube Docker image:
