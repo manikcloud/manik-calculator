@@ -24,6 +24,15 @@ pipeline {
                 sh "mvn test"          	 
             }
         }
+        stage("SonarQube Analysis") {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'sonarqube', passwordVariable: 'password', usernameVariable: 'username')]) {
+                    withSonarQubeEnv('sonarqube-server') {
+                        sh "mvn verify sonar:sonar -Dsonar.host.url=http://34.239.105.136:9000 -Dsonar.login=${username} -Dsonar.password=${password}"
+                    }
+                }
+            }
+        }
         stage("Maven Package") {
             steps {
                 sh "mvn package"
@@ -31,8 +40,16 @@ pipeline {
         }
         stage("Deploy On Server") {          	 
             steps {  	 
-                deploy adapters: [tomcat9(credentialsId: 'tomcat-9', path: '', url: 'http://44.206.250.166:8090/')], contextPath: '/manik-calculator', war: '**/target/*.war'         	 
+                deploy adapters: [tomcat9(credentialsId: 'tomcat-9', path: '', url: 'http://34.239.105.136:8090')], contextPath: '/manik-calculator', war: '**/target/*.war'         	 
             }
         }  	
+    }
+    post {
+        always {
+            junit 'target/surefire-reports/*.xml'
+        }
+        success {
+            echo "App URL: http://34.239.105.136:8090/manik-calculator/"
+        }
     }
 }
