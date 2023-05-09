@@ -214,3 +214,16 @@ This will reference the SonarQube username and password stored in the Jenkins cr
 13. Save your Jenkins job and run it. The SonarQube password will now be securely stored in Jenkins and not visible in your job configuration.
 
 Congratulations! You have successfully integrated the Manik-Calculator project with SonarQube and Jenkins.
+
+
+
+## Connect & Follow
+
+For more info, please connect and follow me:
+
+- Github: [https://github.com/manikcloud](https://github.com/manikcloud)
+- LinkedIn: [https://www.linkedin.com/in/vkmanik/](https://www.linkedin.com/in/vkmanik/)
+- Email: [varunmanik1@gmail.com](mailto:varunmanik1@gmail.com)
+- Facebook: [https://www.facebook.com/cloudvirtualization/](https://www.facebook.com/cloudvirtualization/)
+- YouTube: [https://bit.ly/32fknRN](https://bit.ly/32fknRN)
+- Twitter: [https://twitter.com/varunkmanik](https://twitter.com/varunkmanik)
