@@ -36,7 +36,12 @@ pipeline {
             steps {  	 
                 sh "mvn verify"          	 
             }
-        }                
+        }
+        stage('Publish Unit Test Report') {
+            steps {
+                junit 'target/surefire-reports/*.xml'
+            }
+        }               
         // stage("SonarQube Analysis") {
         //     steps {
         //         withCredentials([usernamePassword(credentialsId: 'sonarqube', passwordVariable: 'password', usernameVariable: 'username')]) {
