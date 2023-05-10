@@ -24,15 +24,48 @@ pipeline {
                 sh "mvn test"          	 
             }
         }
+        stage("SonarQube Analysis") {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'sonarqube', passwordVariable: 'password', usernameVariable: 'username')]) {
+                    withSonarQubeEnv('sonarqube-server') {
+                        sh "mvn verify sonar:sonar -Dsonar.host.url=http://34.239.105.136:9000 -Dsonar.login=${username} -Dsonar.password=${password}"
+                    }
+                }
+            }
+        }
         stage("Maven Package") {
             steps {
-                sh "mvn package"
+                sh "mvn package" 
             }
         }
         stage("Deploy On Server") {          	 
             steps {  	 
-                deploy adapters: [tomcat9(credentialsId: 'tomcat-9', path: '', url: 'http://44.206.250.166:8090/')], contextPath: '/manik-calculator', war: '**/target/*.war'         	 
+                deploy adapters: [tomcat9(credentialsId: 'tomcat-9', path: '', url: 'http://34.239.105.136:8090')], contextPath: '/manik-calculator', war: '**/target/*.war'         	 
             }
-        }  	 
+        }  	
+    }
+    post {
+        always {
+            junit 'target/surefire-reports/*.xml'
+        }
+        success {
+            echo "App URL: http://34.239.105.136:8090/manik-calculator/"
+        }
     }
 }
+
+    success {
+            emailext (
+                to: 'varunmanik1@gmail.com',
+                subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                body: "The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' completed successfully."
+            )
+        }
+        failure {
+            emailext (
+                to: 'varunmanik1@gmail.com',
+                subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                body: "The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed."
+            )
+        } 
+    }
