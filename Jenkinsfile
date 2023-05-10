@@ -34,7 +34,7 @@ pipeline {
                         sh "mvn verify sonar:sonar -Dsonar.host.url=http://${SERVER_IP}:9000 -Dsonar.login=${username} -Dsonar.password=${password}"
                     }
                 }
-            }
+            } 
         }
         stage("Maven Package") {
             steps {
