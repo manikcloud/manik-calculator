@@ -68,19 +68,19 @@ pipeline {
         }
         success {
             echo "App URL: http://${SERVER_IP}:8090/manik-calculator/"
-            // emailext (
-            //     to: 'varunmanik1@gmail.com',
-            //     subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-            //     body: "The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' completed successfully."
-            // )
+            emailext (
+                to: 'varunmanik1@gmail.com',
+                subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                body: "The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' completed successfully."
+            )
         }
         failure {
             echo "Failed to deploy application to http://${SERVER_IP}:8090/manik-calculator/"
-            // emailext (
-            //     to: 'varunmanik1@gmail.com',
-            //     subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-            //     body: "The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed."
-            // )
+            emailext (
+                to: 'varunmanik1@gmail.com',
+                subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                body: "The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed."
+            )
         } 
     }
 }
