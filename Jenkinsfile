@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        SERVER_IP = sh(script: 'curl -s http://169.254.169.254/latest/meta-data/public-ipv4', returnStdout: true).trim()
+    }
     tools {
         maven 'my_mvn'
     }
@@ -28,7 +31,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'sonarqube', passwordVariable: 'password', usernameVariable: 'username')]) {
                     withSonarQubeEnv('sonarqube-server') {
-                        sh "mvn verify sonar:sonar -Dsonar.host.url=http://34.239.105.136:9000 -Dsonar.login=${username} -Dsonar.password=${password}"
+                        sh "mvn verify sonar:sonar -Dsonar.host.url=http://${SERVER_IP}:9000 -Dsonar.login=${username} -Dsonar.password=${password}"
                     }
                 }
             }
@@ -40,7 +43,7 @@ pipeline {
         }
         stage("Deploy On Server") {          	 
             steps {  	 
-                deploy adapters: [tomcat9(credentialsId: 'tomcat-9', path: '', url: 'http://34.239.105.136:8090')], contextPath: '/manik-calculator', war: '**/target/*.war'         	 
+                deploy adapters: [tomcat9(credentialsId: 'tomcat-9', path: '', url: "http://${SERVER_IP}:8090")], contextPath: '/manik-calculator', war: '**/target/*.war'         	 
             }
         }  	
     }
@@ -49,12 +52,7 @@ pipeline {
             junit 'target/surefire-reports/*.xml'
         }
         success {
-            echo "App URL: http://34.239.105.136:8090/manik-calculator/"
-        }
-    }
-}
-
-    success {
+            echo "App URL: http://${SERVER_IP}:8090/manik-calculator/"
             emailext (
                 to: 'varunmanik1@gmail.com',
                 subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
@@ -62,6 +60,7 @@ pipeline {
             )
         }
         failure {
+            echo "Failed to deploy application to http://${SERVER_IP}:8090/manik-calculator/"
             emailext (
                 to: 'varunmanik1@gmail.com',
                 subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
@@ -69,3 +68,4 @@ pipeline {
             )
         } 
     }
+}
