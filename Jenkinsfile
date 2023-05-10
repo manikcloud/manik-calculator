@@ -66,7 +66,7 @@ pipeline {
         stage('Build and Static Analysis') {
             steps {
                 // This is just an example. Replace this with your actual build step that generates the Checkstyle report.
-                sh 'make checkstyle'
+                sh 'mvn checkstyle:checkstyle'
 
                 // Record the issues
                 recordIssues tools: [checkStyle(pattern: '**/checkstyle-result.xml')]
