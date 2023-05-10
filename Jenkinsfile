@@ -33,6 +33,6 @@ pipeline {
             steps {  	 
                 deploy adapters: [tomcat9(credentialsId: 'tomcat-9', path: '', url: 'http://44.206.250.166:8090/')], contextPath: '/manik-calculator', war: '**/target/*.war'         	 
             }
-        }  	
+        }  	 
     }
 }
