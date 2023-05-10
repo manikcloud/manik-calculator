@@ -57,11 +57,18 @@ pipeline {
             }
         }
         stage("Checkstyle") {
-    steps {
-        sh "mvn checkstyle:checkstyle"
-        checkstyle canComputeNew: true, defaultEncoding: '', healthy: '', pattern: 'target/checkstyle-result.xml', unHealthy: ''
-    }
-}
+            steps {
+                sh "mvn checkstyle:checkstyle"
+                checkstyle canComputeNew: true, defaultEncoding: '', healthy: '', pattern: 'target/checkstyle-result.xml', unHealthy: ''
+            }
+        }
+
+        stage("FindBugs Analysis") {
+            steps {
+                sh "mvn findbugs:findbugs"
+                findbugs pattern: 'target/findbugsXml.xml'
+            }
+        }
 
         // stage("Deploy On Server") {          	 
         //     steps {  	 
