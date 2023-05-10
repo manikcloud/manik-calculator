@@ -56,19 +56,31 @@ pipeline {
                 sh "mvn package" 
             }
         }
-        stage("Checkstyle") {
-            steps {
-                sh "mvn checkstyle:checkstyle"
-                checkstyle canComputeNew: true, defaultEncoding: '', healthy: '', pattern: 'target/checkstyle-result.xml', unHealthy: ''
-            }
-        }
+        // stage("Checkstyle") {
+        //     steps {
+        //         sh "mvn checkstyle:checkstyle"
+        //         checkstyle canComputeNew: true, defaultEncoding: '', healthy: '', pattern: 'target/checkstyle-result.xml', unHealthy: ''
+        //     }
+        // }
+stage("Checkstyle") {
+    steps {
+        sh "mvn checkstyle:checkstyle"
+        step([$class: 'CheckStylePublisher',
+            pattern: 'target/checkstyle-result.xml',
+            canComputeNew: true, 
+            defaultEncoding: '', 
+            healthy: '', 
+            unHealthy: ''
+        ])
+    }
+}
 
-        stage("FindBugs Analysis") {
-            steps {
-                sh "mvn findbugs:findbugs"
-                findbugs pattern: 'target/findbugsXml.xml'
-            }
-        }
+        // stage("FindBugs Analysis") {
+        //     steps {
+        //         sh "mvn findbugs:findbugs"
+        //         findbugs pattern: 'target/findbugsXml.xml'
+        //     }
+        // }
 
         // stage("Deploy On Server") {          	 
         //     steps {  	 
