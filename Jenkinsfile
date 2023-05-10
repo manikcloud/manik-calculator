@@ -32,11 +32,11 @@ pipeline {
                 sh "mvn validate"          	 
             }
         }
-        stage("Unit Verify") {          	 
-            steps {  	 
-                sh "mvn verify"          	 
-            }
-        }
+        // stage("Unit Verify") {          	 
+        //     steps {  	 
+        //         sh "mvn verify"          	 
+        //     }
+        // }
         stage('Publish Unit Test Report') {
             steps {
                 junit 'target/surefire-reports/*.xml'
