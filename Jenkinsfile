@@ -62,18 +62,18 @@ pipeline {
         //         checkstyle canComputeNew: true, defaultEncoding: '', healthy: '', pattern: 'target/checkstyle-result.xml', unHealthy: ''
         //     }
         // }
-stage("Checkstyle") {
-    steps {
-        sh "mvn checkstyle:checkstyle"
-        step([$class: 'CheckStylePublisher',
-            pattern: 'target/checkstyle-result.xml',
-            canComputeNew: true, 
-            defaultEncoding: '', 
-            healthy: '', 
-            unHealthy: ''
-        ])
-    }
-}
+
+        stage('Build and Static Analysis') {
+            steps {
+                // This is just an example. Replace this with your actual build step that generates the Checkstyle report.
+                sh 'make checkstyle'
+
+                // Record the issues
+                recordIssues tools: [checkStyle(pattern: '**/checkstyle-result.xml')]
+            }
+        }
+
+
 
         // stage("FindBugs Analysis") {
         //     steps {
