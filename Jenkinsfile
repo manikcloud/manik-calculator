@@ -42,15 +42,15 @@ pipeline {
                 junit 'target/surefire-reports/*.xml'
             }
         }               
-        // stage("SonarQube Analysis") {
-        //     steps {
-        //         withCredentials([usernamePassword(credentialsId: 'sonarqube', passwordVariable: 'password', usernameVariable: 'username')]) {
-        //             withSonarQubeEnv('sonarqube-server') {
-        //                 sh "mvn verify sonar:sonar -Dsonar.host.url=http://${SERVER_IP}:9000 -Dsonar.login=${username} -Dsonar.password=${password}"
-        //             }
-        //         }
-        //     } 
-        // }
+        stage("SonarQube Analysis") {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'sonarqube', passwordVariable: 'password', usernameVariable: 'username')]) {
+                    withSonarQubeEnv('sonarqube-server') {
+                        sh "mvn verify sonar:sonar -Dsonar.host.url=http://${SERVER_IP}:9000 -Dsonar.login=${username} -Dsonar.password=${password}"
+                    }
+                }
+            } 
+        }
         stage("Maven Package") {
             steps {
                 sh "mvn package" 
