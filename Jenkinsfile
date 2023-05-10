@@ -42,25 +42,32 @@ pipeline {
                 junit 'target/surefire-reports/*.xml'
             }
         }               
-        stage("SonarQube Analysis") {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'sonarqube', passwordVariable: 'password', usernameVariable: 'username')]) {
-                    withSonarQubeEnv('sonarqube-server') {
-                        sh "mvn verify sonar:sonar -Dsonar.host.url=http://${SERVER_IP}:9000 -Dsonar.login=${username} -Dsonar.password=${password}"
-                    }
-                }
-            } 
-        }
+        // stage("SonarQube Analysis") {
+        //     steps {
+        //         withCredentials([usernamePassword(credentialsId: 'sonarqube', passwordVariable: 'password', usernameVariable: 'username')]) {
+        //             withSonarQubeEnv('sonarqube-server') {
+        //                 sh "mvn verify sonar:sonar -Dsonar.host.url=http://${SERVER_IP}:9000 -Dsonar.login=${username} -Dsonar.password=${password}"
+        //             }
+        //         }
+        //     } 
+        // }
         stage("Maven Package") {
             steps {
                 sh "mvn package" 
             }
         }
-        stage("Deploy On Server") {          	 
-            steps {  	 
-                deploy adapters: [tomcat9(credentialsId: 'tomcat-9', path: '', url: "http://${SERVER_IP}:8090")], contextPath: '/manik-calculator', war: '**/target/*.war'         	 
-            }
-        }  	
+        stage("Checkstyle") {
+    steps {
+        sh "mvn checkstyle:checkstyle"
+        checkstyle canComputeNew: true, defaultEncoding: '', healthy: '', pattern: 'target/checkstyle-result.xml', unHealthy: ''
+    }
+}
+
+        // stage("Deploy On Server") {          	 
+        //     steps {  	 
+        //         deploy adapters: [tomcat9(credentialsId: 'tomcat-9', path: '', url: "http://${SERVER_IP}:8090")], contextPath: '/manik-calculator', war: '**/target/*.war'         	 
+        //     }
+        // }  	
     }
     post {
         always {
@@ -68,19 +75,19 @@ pipeline {
         }
         success {
             echo "App URL: http://${SERVER_IP}:8090/manik-calculator/"
-            emailext (
-                to: 'varunmanik1@gmail.com',
-                subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-                body: "The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' completed successfully."
-            )
+            // emailext (
+            //     to: 'varunmanik1@gmail.com',
+            //     subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+            //     body: "The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' completed successfully."
+            // )
         }
         failure {
             echo "Failed to deploy application to http://${SERVER_IP}:8090/manik-calculator/"
-            emailext (
-                to: 'varunmanik1@gmail.com',
-                subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-                body: "The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed."
-            )
+            // emailext (
+            //     to: 'varunmanik1@gmail.com',
+            //     subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+            //     body: "The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed."
+            // )
         } 
     }
 }

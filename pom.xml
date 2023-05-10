@@ -77,7 +77,7 @@
     <finalName>manik-calculator</finalName>
     <plugins>
 
-<!-- 
+
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-checkstyle-plugin</artifactId>
@@ -105,9 +105,8 @@
             </goals>
         </execution>
     </executions>
-</plugin> -->
+</plugin>
 
-<!-- 
 <plugin>
     <groupId>org.codehaus.mojo</groupId>
     <artifactId>findbugs-maven-plugin</artifactId>
