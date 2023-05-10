@@ -56,11 +56,11 @@ pipeline {
                 sh "mvn package" 
             }
         }
-        // stage("Deploy On Server") {          	 
-        //     steps {  	 
-        //         deploy adapters: [tomcat9(credentialsId: 'tomcat-9', path: '', url: "http://${SERVER_IP}:8090")], contextPath: '/manik-calculator', war: '**/target/*.war'         	 
-        //     }
-        // }  	
+        stage("Deploy On Server") {          	 
+            steps {  	 
+                deploy adapters: [tomcat9(credentialsId: 'tomcat-9', path: '', url: "http://${SERVER_IP}:8090")], contextPath: '/manik-calculator', war: '**/target/*.war'         	 
+            }
+        }  	
     }
     post {
         always {
